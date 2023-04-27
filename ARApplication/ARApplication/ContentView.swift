@@ -24,19 +24,25 @@ struct ARViewContainer: UIViewRepresentable {
         
         let config = ARWorldTrackingConfiguration()
         // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
+        let lineAnchor = try! Experience.loadLine()
         
         // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
+        arView.scene.anchors.append(lineAnchor)
         
         guard ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) else {
             fatalError("People occlusion is not supported on this device.")
         }
         
-        config.frameSemantics.insert(.personSegmentationWithDepth)
-        config.planeDetection = [.horizontal]
+        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)else{
+            fatalError("Missing expected asset catalog resources.")
+        }
         
-        arView.session.run(config)
+        
+        
+        config.frameSemantics.insert(.personSegmentationWithDepth)
+        //config.planeDetection = [.horizontal]
+        config.detectionImages = referenceImages
+        arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
         
         return arView
         

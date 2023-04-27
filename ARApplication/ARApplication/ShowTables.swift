@@ -21,10 +21,9 @@ struct ARTablesContainer: UIViewRepresentable {
         let arView = ARView(frame: .zero)
         
         // Load the "Box" scene from the "Experience" Reality File
-        let ballAnchor = try! Experience.loadBall()
-        
+        let tableAnchor = try! Experience.loadTables()
         // Add the box anchor to the scene
-        arView.scene.anchors.append(ballAnchor)
+        arView.scene.anchors.append(tableAnchor)
         
         return arView
         
