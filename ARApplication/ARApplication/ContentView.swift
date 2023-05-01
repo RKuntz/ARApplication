@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  ARApplication
-//
-//  Created by Ryker Kuntz on 4/20/23.
-//
-
 import SwiftUI
 import RealityKit
 import ARKit
@@ -21,13 +14,10 @@ struct ARViewContainer: UIViewRepresentable {
     func makeUIView(context: Context) -> ARView {
         
         let arView = ARView(frame: .zero)
+        context.coordinator.view = arView
+        arView.session.delegate = context.coordinator
+        let config = ARWorldTrackingConfiguration()
         
-        //let config = ARWorldTrackingConfiguration()
-        // Load the "Box" scene from the "Experience" Reality File
-        let lineAnchor = try! Experience.loadLine()
-        
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(lineAnchor)
         
         guard ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) else {
             fatalError("People occlusion is not supported on this device.")
@@ -36,22 +26,37 @@ struct ARViewContainer: UIViewRepresentable {
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)else{
             fatalError("Missing expected asset catalog resources.")
         }
-        
-        
-        
-        //config.frameSemantics.insert(.personSegmentationWithDepth)
-        //config.planeDetection = [.horizontal]
-       // config.detectionImages = referenceImages
-        //arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
-        
+        config.frameSemantics.insert(.personSegmentationWithDepth)
+        config.planeDetection = [.horizontal]
+        config.detectionImages = referenceImages
+        arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
         return arView
         
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {}
-    
-}
+    func makeCoordinator() -> Coordinator {
+            Coordinator()
+        }
 
+}
+class Coordinator: NSObject, ARSessionDelegate
+{
+    weak var view: ARView?
+    weak var myScene: Experience.Line?
+    
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        for anchor in anchors{
+            if (anchor.name == "Accessability_donut3"){
+                let newAnchor = AnchorEntity(world: anchor.transform)
+                let lineAnchor = try! Experience.loadLine()
+                newAnchor.addChild(lineAnchor)
+                view!.scene.anchors.append(lineAnchor)
+                print("hey help me")
+            }
+        }
+    }
+}
 /*#if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import RealityKit
+import ARKit
+import UIKit
 
 struct ShowTables : View {
     var body: some View {
@@ -17,22 +19,52 @@ struct ShowTables : View {
 struct ARTablesContainer: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
-        
         let arView = ARView(frame: .zero)
+        context.coordinator.view = arView
+        arView.session.delegate = context.coordinator
+        let config = ARWorldTrackingConfiguration()
+       
         
-        // Load the "Box" scene from the "Experience" Reality File
-        let tableAnchor = try! Experience.loadTables()
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(tableAnchor)
+        guard ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) else {
+            fatalError("People occlusion is not supported on this device.")
+        }
+        
+        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)else{
+            fatalError("Missing expected asset catalog resources.")
+        }
+
+        config.frameSemantics.insert(.personSegmentationWithDepth)
+        config.planeDetection = [.horizontal]
+        config.detectionImages = referenceImages
+        arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
         
         return arView
         
-    }
+         }
     
     func updateUIView(_ uiView: ARView, context: Context) {}
-    
+    func makeCoordinator() -> Coordinator2 {
+            Coordinator2()
+        }
 }
 
+class Coordinator2: NSObject, ARSessionDelegate
+{
+    weak var view: ARView?
+    weak var myScene: Experience.Line?
+    
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        for anchor in anchors{
+            if (anchor.name == "Accessability_donut3"){
+                let newAnchor = AnchorEntity(world: anchor.transform)
+                let tableAnchor = try! Experience.loadTables()
+                newAnchor.addChild(tableAnchor)
+                view!.scene.anchors.append(tableAnchor)
+                print("hey help me")
+            }
+        }
+    }
+}
 /*struct ShowTables_Previews: PreviewProvider {
     static var previews: some View {
         ShowTables()

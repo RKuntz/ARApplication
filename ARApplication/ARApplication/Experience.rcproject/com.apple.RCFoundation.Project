@@ -6,9 +6,8 @@
           "__content" : [
             {
               "arAnchorSpecification" : {
-                "name" : "image",
-                "physicalWidth" : 0.15240000188350677,
-                "url" : "image:f7820f99b46f0ef85c3e456bb731c569\/Accessability_donut3.png"
+                "alignment" : "horizontal",
+                "name" : "surface"
               },
               "behaviors" : [
 
@@ -308,9 +307,8 @@
           "__content" : [
             {
               "arAnchorSpecification" : {
-                "name" : "image",
-                "physicalWidth" : 0.15240000188350677,
-                "url" : "image:f7820f99b46f0ef85c3e456bb731c569\/Accessability_donut3.png"
+                "alignment" : "horizontal",
+                "name" : "surface"
               },
               "behaviors" : [
 
