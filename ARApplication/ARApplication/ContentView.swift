@@ -22,7 +22,7 @@ struct ARViewContainer: UIViewRepresentable {
         
         let arView = ARView(frame: .zero)
         
-        let config = ARWorldTrackingConfiguration()
+        //let config = ARWorldTrackingConfiguration()
         // Load the "Box" scene from the "Experience" Reality File
         let lineAnchor = try! Experience.loadLine()
         
@@ -39,10 +39,10 @@ struct ARViewContainer: UIViewRepresentable {
         
         
         
-        config.frameSemantics.insert(.personSegmentationWithDepth)
+        //config.frameSemantics.insert(.personSegmentationWithDepth)
         //config.planeDetection = [.horizontal]
-        config.detectionImages = referenceImages
-        arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
+       // config.detectionImages = referenceImages
+        //arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
         
         return arView
         
