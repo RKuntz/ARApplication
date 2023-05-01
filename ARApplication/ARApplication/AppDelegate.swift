@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  ARApplication
-//
-//  Created by Ryker Kuntz on 4/20/23.
-//
-
 import UIKit
 import SwiftUI
 import ARKit

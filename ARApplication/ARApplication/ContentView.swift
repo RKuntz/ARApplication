@@ -46,13 +46,25 @@ class Coordinator: NSObject, ARSessionDelegate
     weak var myScene: Experience.Line?
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        for anchor in anchors{
-            if (anchor.name == "Accessability_donut3"){
-                let newAnchor = AnchorEntity(world: anchor.transform)
-                let lineAnchor = try! Experience.loadLine()
-                newAnchor.addChild(lineAnchor)
-                view!.scene.anchors.append(lineAnchor)
-                print("hey help me")
+        
+        anchors.compactMap { $0 as? ARImageAnchor }.forEach{
+            for anchor in anchors{
+                if (anchor.name == "Accessability_donut3"){
+                    
+                    
+                    let newAnchor = AnchorEntity(.image(group: "AR Resources", name: "Accessability_donut3"))
+                    
+                    newAnchor.transform.matrix = $0.transform
+                    
+                    print(newAnchor.orientation)
+                    print(anchor.transform)
+                    //newAnchor.transform.rotation = anchor.transform
+                    
+                    let lineAnchor = try! Experience.loadLine()
+                    newAnchor.addChild(lineAnchor)
+                    view!.scene.anchors.append(lineAnchor)
+                    print("hey help me")
+                }
             }
         }
     }
