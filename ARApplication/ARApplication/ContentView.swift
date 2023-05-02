@@ -30,10 +30,14 @@ struct ARViewContainer: UIViewRepresentable {
         config.planeDetection = [.horizontal]
         config.detectionImages = referenceImages
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
+        
+        let lineAnchor = try!Experience.loadLine()
+        
 
         return arView
         
     }
+    
     
     func updateUIView(_ uiView: ARView, context: Context) {}
     func makeCoordinator() -> Coordinator {
@@ -43,9 +47,11 @@ struct ARViewContainer: UIViewRepresentable {
 }
 class Coordinator: NSObject, ARSessionDelegate
 {
+    
     var imageAnchorToEntity: [ARImageAnchor: AnchorEntity] = [:]
     weak var view: ARView?
     weak var myScene: Experience.Line?
+    
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         
@@ -64,6 +70,8 @@ class Coordinator: NSObject, ARSessionDelegate
                     newAnchor.addChild(lineAnchor)
                     view!.scene.addAnchor(newAnchor)
                     newAnchor.transform.matrix = $0.transform
+                    imageAnchorToEntity[$0] = newAnchor
+                    
                     print("hey help me")
                 }
             }
