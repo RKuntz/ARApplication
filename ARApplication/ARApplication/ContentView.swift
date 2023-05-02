@@ -30,6 +30,7 @@ struct ARViewContainer: UIViewRepresentable {
         config.planeDetection = [.horizontal]
         config.detectionImages = referenceImages
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
+
         return arView
         
     }
@@ -42,6 +43,7 @@ struct ARViewContainer: UIViewRepresentable {
 }
 class Coordinator: NSObject, ARSessionDelegate
 {
+    var imageAnchorToEntity: [ARImageAnchor: AnchorEntity] = [:]
     weak var view: ARView?
     weak var myScene: Experience.Line?
     
@@ -52,20 +54,26 @@ class Coordinator: NSObject, ARSessionDelegate
                 if (anchor.name == "Accessability_donut3"){
                     
                     
-                    let newAnchor = AnchorEntity(.image(group: "AR Resources", name: "Accessability_donut3"))
-                    
-                    newAnchor.transform.matrix = $0.transform
-                    
+                    let newAnchor = AnchorEntity()
+                                    
                     print(newAnchor.orientation)
                     print(anchor.transform)
                     //newAnchor.transform.rotation = anchor.transform
                     
                     let lineAnchor = try! Experience.loadLine()
                     newAnchor.addChild(lineAnchor)
-                    view!.scene.anchors.append(lineAnchor)
+                    view!.scene.addAnchor(newAnchor)
+                    newAnchor.transform.matrix = $0.transform
                     print("hey help me")
                 }
             }
+        }
+    }
+    
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]){
+        anchors.compactMap {$0 as? ARImageAnchor }.forEach{
+            let anchorEntity = imageAnchorToEntity[$0]
+            anchorEntity?.transform.matrix = $0.transform
         }
     }
 }
