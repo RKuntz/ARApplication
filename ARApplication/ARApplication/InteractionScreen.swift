@@ -7,6 +7,8 @@
 
 import SwiftUI
 import UIKit
+import NearbyInteraction
+import MultipeerConnectivity
 
 struct InteractionScreen: View {
     var body: some View {

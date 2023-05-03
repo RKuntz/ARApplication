@@ -22,6 +22,9 @@
 		60A8B7F02A02E51A00D0F74B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60A8B7ED2A02E51A00D0F74B /* Main.storyboard */; };
 		60A8B7F22A02E62F00D0F74B /* InteractionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8B7F12A02E62F00D0F74B /* InteractionScreen.swift */; };
 		60A8B7F62A02EB6A00D0F74B /* MPCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8B7F52A02EB6A00D0F74B /* MPCSession.swift */; };
+		60A8B7F92A02F0BC00D0F74B /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A8B7F82A02F0BC00D0F74B /* MultipeerConnectivity.framework */; };
+		60A8B7FB2A02F0C500D0F74B /* NearbyInteraction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A8B7FA2A02F0C500D0F74B /* NearbyInteraction.framework */; };
+		60A8B7FE2A02F91000D0F74B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60A8B7FD2A02F91000D0F74B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,10 @@
 		60A8B7ED2A02E51A00D0F74B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		60A8B7F12A02E62F00D0F74B /* InteractionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionScreen.swift; sourceTree = "<group>"; };
 		60A8B7F52A02EB6A00D0F74B /* MPCSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCSession.swift; sourceTree = "<group>"; };
+		60A8B7F82A02F0BC00D0F74B /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		60A8B7FA2A02F0C500D0F74B /* NearbyInteraction.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NearbyInteraction.framework; path = System/Library/Frameworks/NearbyInteraction.framework; sourceTree = SDKROOT; };
+		60A8B7FC2A02F26D00D0F74B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		60A8B7FD2A02F91000D0F74B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60A8B7FB2A02F0C500D0F74B /* NearbyInteraction.framework in Frameworks */,
+				60A8B7F92A02F0BC00D0F74B /* MultipeerConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +103,7 @@
 				60547FBA29F1E2F600F588AC /* ARApplicationTests */,
 				60547FC429F1E2F600F588AC /* ARApplicationUITests */,
 				60547FA629F1E2F400F588AC /* Products */,
+				60A8B7F72A02F0BB00D0F74B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +120,7 @@
 		60547FA729F1E2F400F588AC /* ARApplication */ = {
 			isa = PBXGroup;
 			children = (
+				60A8B7FC2A02F26D00D0F74B /* Info.plist */,
 				60547FA829F1E2F400F588AC /* AppDelegate.swift */,
 				60547FD429F1E37800F588AC /* StartWindow.swift */,
 				60547FAA29F1E2F400F588AC /* ContentView.swift */,
@@ -155,8 +166,18 @@
 				60A8B7ED2A02E51A00D0F74B /* Main.storyboard */,
 				60A8B7EC2A02E51A00D0F74B /* MathUtilities.swift */,
 				60A8B7EB2A02E51A00D0F74B /* ViewController.swift */,
+				60A8B7FD2A02F91000D0F74B /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		60A8B7F72A02F0BB00D0F74B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				60A8B7FA2A02F0C500D0F74B /* NearbyInteraction.framework */,
+				60A8B7F82A02F0BC00D0F74B /* MultipeerConnectivity.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60A8B7F02A02E51A00D0F74B /* Main.storyboard in Resources */,
+				60A8B7FE2A02F91000D0F74B /* LaunchScreen.storyboard in Resources */,
 				60547FB229F1E2F600F588AC /* Preview Assets.xcassets in Resources */,
 				60547FAF29F1E2F600F588AC /* Assets.xcassets in Resources */,
 			);
@@ -460,7 +482,9 @@
 				DEVELOPMENT_TEAM = 4X4LT737N2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ARApplication/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "This app utilizes Nearby Interaction to share your location with a paired device. Select \"Allow\" in order to use this feature.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -492,7 +516,9 @@
 				DEVELOPMENT_TEAM = 4X4LT737N2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ARApplication/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "This app utilizes Nearby Interaction to share your location with a paired device. Select \"Allow\" in order to use this feature.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;

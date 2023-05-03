@@ -12,7 +12,16 @@ import UIKit
 
 struct ShowTables : View {
     var body: some View {
-        ARTablesContainer().edgesIgnoringSafeArea(.all)
+        VStack{
+            ARTablesContainer().edgesIgnoringSafeArea(.all)
+            NavigationLink(destination:InteractionScreen()){
+                Text("I have found a table")
+                    .font(.system(size: 28, weight: .medium))
+                    .foregroundColor(.white)
+                    .background(Color.orange)
+                    .cornerRadius(30)
+            }
+        }
     }
 }
 

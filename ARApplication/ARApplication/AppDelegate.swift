@@ -20,6 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = UIHostingController(rootView: contentView)
         self.window = window
         window.makeKeyAndVisible()
+        
+        var isSupported: Bool
+        if #available(iOS 16.0, *) {
+            isSupported = NISession.deviceCapabilities.supportsPreciseDistanceMeasurement
+        } else {
+            isSupported = NISession.isSupported
+        }
+        if !isSupported {
+            print("unsupported device")
+        }
+        
         return true
     }
 
