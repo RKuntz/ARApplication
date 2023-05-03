@@ -1,6 +1,7 @@
 import UIKit
 import SwiftUI
 import ARKit
+import NearbyInteraction
 
 @main
 

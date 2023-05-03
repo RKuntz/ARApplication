@@ -47,6 +47,14 @@ struct StartWindow: View {
                             
                         }
                         .padding(.top)
+                        NavigationLink(destination:InteractionScreen()){
+                            Text("I am a Guru Employee")
+                                .font(.system(size: 28, weight: .medium))
+                                .foregroundColor(.white)
+                                .frame(width: 160, height: 60)
+                                .background(Color.orange)
+                                .cornerRadius(30)
+                        }
                     }
 
                 }
