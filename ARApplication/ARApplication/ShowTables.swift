@@ -34,7 +34,7 @@ struct ARTablesContainer: UIViewRepresentable {
         }
 
         config.frameSemantics.insert(.personSegmentationWithDepth)
-        config.planeDetection = [.horizontal]
+        config.planeDetection = [.vertical]
         config.detectionImages = referenceImages
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
         
